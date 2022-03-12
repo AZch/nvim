@@ -63,6 +63,10 @@ nvim_lsp.gopls.setup {
   },
 }
 
+nvim_lsp.java_language_server.setup {
+  on_attach = on_attach,
+  cmd = { "/Users/antonzhuikov/.config/java-language-server/dist/lang_server_mac.sh" }
+}
 -- nvim_lsp.jdtls.setup{
 --    on_attach = on_attach,
 --    cmd = { "jdtls" }
