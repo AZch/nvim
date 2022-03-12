@@ -32,8 +32,6 @@ Plug 'williamboman/nvim-lsp-installer'
 
 Plug 'tami5/lspsaga.nvim'
 
-Plug 'mfussenegger/nvim-jdtls'
-
 call plug#end()
 
 " cmp

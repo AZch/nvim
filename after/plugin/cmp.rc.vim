@@ -3,8 +3,8 @@ if !exists('g:loaded_cmp') | finish | endif
 set completeopt=menuone,noinsert,noselect
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 lua <<EOF
   local cmp = require'cmp'
@@ -44,7 +44,7 @@ lua <<EOF
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    maping = {
+    mapping = {
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
