@@ -9,6 +9,10 @@ nmap <silent> <space>gy :Goyo<CR>
 nmap <silent> <space>gl :diffget //3<CR>
 nmap <silent> <space>gh :diffget //2<CR>
 
+" jdtls
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
+
+
 nnoremap c* *Ncgn
 
 command EF :!npx eslint --fix %
