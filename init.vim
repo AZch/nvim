@@ -7,7 +7,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'startup-nvim/startup.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'master'}
 
@@ -22,20 +22,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
-Plug 'onsails/lspkind-nvim'
-
-Plug 'simrat39/rust-tools.nvim'
-
-Plug 'creativenull/diagnosticls-configs-nvim'
-
-Plug 'williamboman/nvim-lsp-installer'
-
-Plug 'tami5/lspsaga.nvim'
-
-Plug 'mfussenegger/nvim-jdtls'
-
 call plug#end()
-
 
 " cmp
 set completeopt=menu,menuone,noselect
@@ -43,7 +30,7 @@ set completeopt=menu,menuone,noselect
 " General
 set encoding=UTF-8
 set fillchars=vert:│
-set scrolloff=8
+set scrolloff=6
 
 " Override color scheme to make split the same color as tmux's default
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=DarkGray ctermbg=NONE
@@ -57,7 +44,7 @@ set foldlevel=99
 nmap z za
 
 " Set relative number
-set rnu
+set nu rnu
 
 " Tabulation
 set wrap linebreak
@@ -149,5 +136,5 @@ if exists("&termguicolors") && exists("&winblend")
   colorscheme NeoSolarized
 endif
 
-"}}}a
+"}}}
 set signcolumn=no

@@ -44,7 +44,7 @@ lua <<EOF
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    mapping = {
+   mapping = {
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
@@ -89,4 +89,4 @@ lua <<EOF
   
 
   vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
-EOF
+EOF 
