@@ -6,7 +6,7 @@ set completeopt=menuone,noinsert,noselect
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-lua <<EOF
+lua << EOF
   local cmp = require'cmp'
   local lspkind = require'lspkind'
 
@@ -89,4 +89,5 @@ lua <<EOF
   
 
   vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
-EOF 
+EOF
+

@@ -22,6 +22,16 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
+Plug 'onsails/lspkind-nvim'
+
+Plug 'simrat39/rust-tools.nvim'
+
+Plug 'creativenull/diagnosticls-configs-nvim'
+
+Plug 'williamboman/nvim-lsp-installer'
+
+Plug 'tami5/lspsaga.nvim'
+
 call plug#end()
 
 " cmp
@@ -30,7 +40,7 @@ set completeopt=menu,menuone,noselect
 " General
 set encoding=UTF-8
 set fillchars=vert:│
-set scrolloff=6
+set scrolloff=8
 
 " Override color scheme to make split the same color as tmux's default
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=DarkGray ctermbg=NONE
