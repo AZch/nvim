@@ -6,7 +6,7 @@ set completeopt=menuone,noinsert,noselect
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-lua <<EOF
+lua << EOF
   local cmp = require'cmp'
   local lspkind = require'lspkind'
 
@@ -44,7 +44,7 @@ lua <<EOF
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    mapping = {
+   mapping = {
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
@@ -90,3 +90,4 @@ lua <<EOF
 
   vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
 EOF
+

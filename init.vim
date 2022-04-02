@@ -7,7 +7,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'startup-nvim/startup.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'master'}
 
@@ -36,7 +36,6 @@ Plug 'mfussenegger/nvim-jdtls'
 
 call plug#end()
 
-
 " cmp
 set completeopt=menu,menuone,noselect
 
@@ -57,7 +56,7 @@ set foldlevel=99
 nmap z za
 
 " Set relative number
-set rnu
+set nu rnu
 
 " Tabulation
 set wrap linebreak
@@ -149,5 +148,6 @@ if exists("&termguicolors") && exists("&winblend")
   colorscheme NeoSolarized
 endif
 
-"}}}a
+"}}}
 set signcolumn=no
+

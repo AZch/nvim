@@ -30,7 +30,7 @@ lualine.setup {
     lualine_b = {},
     lualine_c = {{
       'filename',
-      file_status = true, -- displays file status (readonly status, modified sttus)
+      file_status = true, -- displays file status (readonly status, modified stus)
       path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
     }},
     lualine_x = {'location'},
@@ -39,4 +39,4 @@ lualine.setup {
   },
   tabline = {},
   extensions = {'fugitive'}
-  }
+}
