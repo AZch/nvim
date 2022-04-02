@@ -63,9 +63,28 @@ nvim_lsp.gopls.setup {
   },
 }
 
+
+
+
 nvim_lsp.jdtls.setup {
-  on_attach = on_attach,
-  cmd = { 'jdtls' },
+ on_attach = on_attach,
+ cmd = { 'jdtls' },
+ settings = {
+   java = {
+     imports = {
+       gradle = {
+         wrapper = {
+           checksums = {
+             {
+                 sha256 = "b4cf3eff5dc5f521be7543a496a2fbf040a6af6b5ab78390f80f623aa1db8242",
+                 allowed = true,
+             }
+           }
+         }
+       }
+     }
+   }
+ }
 }
 
 nvim_lsp.tsserver.setup {
