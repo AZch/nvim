@@ -13,7 +13,7 @@ local protocol = require'vim.lsp.protocol'
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   --Enable completion triggered by <c-x><c-o>
@@ -26,11 +26,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cm>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   --buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
@@ -40,12 +40,17 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>gf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<space>dd", "<cmd>lua vim.diagnostic.disable()<CR>", opts)
+  buf_set_keymap("n", "<space>de", "<cmd>lua vim.diagnostic.enable()<CR>", opts)
 
   -- formatting
  if client.name == 'tsserver' then
-   client.resolved_capabilities.document_formatting = false
+   client.server_capabilities.documentFormatting = false
+ else
+   buf_set_keymap("n", "<space>gf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+   buf_set_keymap("v", "<space>gf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+   buf_set_keymap("i", "<space>gf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
  end
-
 end
 
 
@@ -66,31 +71,18 @@ nvim_lsp.gopls.setup {
 
 
 
-nvim_lsp.jdtls.setup {
- on_attach = on_attach,
- cmd = { 'jdtls' },
- settings = {
-   java = {
-     imports = {
-       gradle = {
-         wrapper = {
-           checksums = {
-             {
-                 sha256 = "b4cf3eff5dc5f521be7543a496a2fbf040a6af6b5ab78390f80f623aa1db8242",
-                 allowed = true,
-             }
-           }
-         }
-       }
-     }
-   }
- }
+
+
+nvim_lsp.solidity_ls.setup{
+    on_attach = on_attach,
+    cmd = { "solidity-language-server", "--stdio" },
+    filetypes = { "solidity" },
+    root_dir = nvim_lsp.util.root_pattern(".git", "package.json")
 }
 
 nvim_lsp.tsserver.setup {
-  on_attach  = function(client)
-    client.resolved_capabilities.document_formatting = false
-    on_attach(client)
+  on_attach  = function(client, bufnr)
+    on_attach(client, bufnr)
   end,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
   init_options = {
@@ -104,12 +96,50 @@ nvim_lsp.tsserver.setup {
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  linters = {
+    eslint = {
+      sourceName = "eslint",
+      command = "./node_modules/.bin/eslint",
+      rootPatterns = {
+        ".eslitrc.js",
+        "package.json"
+      },
+      debounce = 100,
+      args = {
+        "--cache",
+        "--stdin",
+        "--stdin-filename",
+        "%filepath",
+        "--format",
+        "json"
+      },
+      parseJson = {
+        errorsRoot = "[0].messages",
+        line = "line",
+        column = "column",
+        endLine = "endLine",
+        endColumn = "endColumn",
+        message = "${message} [${ruleId}]",
+        security = "severity"
+      },
+      securities = {
+        [2] = "error",
+        [1] = "warning"
+      }
+    }
+  }
 }
 
 
 nvim_lsp.bashls.setup{
     on_attach = on_attach,
     cmd = { "bash-language-server", "start" }
+}
+
+nvim_lsp.kotlin_language_server.setup{
+  on_attach = on_attach,
+  filetypes = { "kotlin", "kt" },
+  root_dir = nvim_lsp.util.root_pattern("settings.gradle", "pom.xml")
 }
 
 

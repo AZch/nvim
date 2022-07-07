@@ -4,8 +4,12 @@ Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 Plug 'nvim-lualine/lualine.nvim'
 
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 Plug 'startup-nvim/startup.nvim'
 
@@ -27,6 +31,7 @@ Plug 'onsails/lspkind-nvim'
 Plug 'simrat39/rust-tools.nvim'
 
 Plug 'creativenull/diagnosticls-configs-nvim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'williamboman/nvim-lsp-installer'
 
@@ -34,7 +39,20 @@ Plug 'tami5/lspsaga.nvim'
 
 Plug 'mfussenegger/nvim-jdtls'
 
+Plug 'tpope/vim-fugitive'
+Plug 'sindrets/diffview.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+
+" Icons
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
+
 call plug#end()
+
+" Solidity
+au BufNewFile,BufRead *.sol set filetype=solidity
 
 " cmp
 set completeopt=menu,menuone,noselect
@@ -144,8 +162,8 @@ if exists("&termguicolors") && exists("&winblend")
    let g:neosolarized_contrast='high'
   " Use NeoSolarized
   let g:neosolarized_termtrans=1
-  runtime ./colors/NeoSolarized.vim
-  colorscheme NeoSolarized
+  runtime ./colors/Gruvbox.vim
+  colorscheme Gruvbox
 endif
 
 "}}}
